@@ -7,8 +7,7 @@ import { FilmService } from '../film.service';
   styleUrls: ['./films.component.css']
 })
 export class FilmsComponent implements OnInit {
-
-  description: string = 'Middle card description';
+  
   films: object;
   
   
