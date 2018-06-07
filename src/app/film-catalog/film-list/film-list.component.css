@@ -1,0 +1,22 @@
+app-film-item {
+  width: calc(100% - 70px);
+  height: calc(90% - 70px);
+  color: #000000;
+}
+
+.menu-toolbar {
+  background-color: white;
+}
+
+.menu-spacing {
+  flex: 1 1 auto;
+}
+
+p {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-icon {
+  color: #d0a117;
+}

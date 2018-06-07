@@ -1,13 +1,10 @@
-.example-card {
+.card {
   width: calc(100% - 70px);
   height: calc(100% - 70px);
-  color: #ffffff;
-  background: #3acfd5;
-  background: -webkit-linear-gradient(32deg, #3acfd5, #3a4ed5);
-  background: linear-gradient(32deg, #3acfd5, #3a4ed5);
+  color: #000000;
 }
 
-.example-card:hover {
+.card:hover {
   transform: scale(1.01);
 }
 
@@ -25,7 +22,20 @@ mat-card img {
 }
 
 mat-card-content {
-  height: 100px;
-  max-height: 100px;
+  white-space: nowrap;
+  width: 100%;
   overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+mat-card-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+mat-icon {
+  color: red;
 }
