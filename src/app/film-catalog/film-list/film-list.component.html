@@ -1,8 +1,15 @@
 <mat-card class="menu-card">
-<mat-toolbar class="menu-toolbar">
-    <mat-toolbar-row >
-      <p><span><mat-icon>{{favCount ? 'star_rate' : 'stars'}}</mat-icon></span> {{favCount}} films</p>
-      <span class="menu-spacing"></span>
+  <mat-toolbar class="menu-toolbar">
+    <mat-toolbar-row>
+
+      <p><span><mat-icon>{{favCount ? 'star_rate' : 'stars'}}</mat-icon></span> {{favCount}} films</p><span class="menu-spacing"></span>
+
+      <div class="search">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Search film" [(ngModel)]="qwery" (ngModelChange)="search($event)"><mat-icon>search</mat-icon>
+        </mat-form-field>
+      </div>
+
       <div>
         <mat-form-field>
           <mat-select placeholder="Sort by" [(value)]="sortingMethod" (selectionChange)="transform()">
@@ -11,14 +18,19 @@
           </mat-select>
         </mat-form-field>
       </div>
+
     </mat-toolbar-row>
   </mat-toolbar>
 </mat-card>
 <mat-card>
+  <div [ngClass]="{'no-matches': films.length === 0}" *ngIf="films.length === 0"><img src="../assets/img/404_page.jpg" alt=""></div>
 
-<mat-grid-list cols="3" rowHeight="700px">
-  <mat-grid-tile *ngFor="let film of films">
-    <app-film-item [filmItem]='film' (add)="setFavFilms($event, film)"></app-film-item>
-  </mat-grid-tile>
-</mat-grid-list>
+  <mat-grid-list cols="3" class="search-results" rowHeight="600px" *ngIf="films.length !== 0">
+    <mat-grid-tile *ngFor="let film of films | slice:0:show" class="my-grid-tile">
+      <app-film-item [filmItem]='film' (add)="setFavFilms($event)" ></app-film-item>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <button mat-button class="show-more" (click)="show = show+3" *ngIf="show < films.length">Load more  {{films.length-show}} films...</button>
+
 </mat-card>

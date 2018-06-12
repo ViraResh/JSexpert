@@ -1,4 +1,4 @@
-export class Film {
+export interface Film {
     id: number;
     name: string;
     year: string;

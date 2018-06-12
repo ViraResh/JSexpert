@@ -20,3 +20,19 @@ p {
 mat-icon {
   color: #d0a117;
 }
+
+form {
+  margin-right: 5%;
+}
+
+.search {
+  margin-right: 5%;
+}
+
+.search .mat-form-field-infix {
+  margin-right: 15%;
+}
+
+.no-matches img {
+  width: 100%;
+}
