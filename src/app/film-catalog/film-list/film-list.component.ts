@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FilmService } from '../film.service';
 import { Input } from '@angular/core';
+import { SearchFilterPipe } from '../search-filter.pipe'
 import { Film } from '../film';
 
 @Component({
@@ -13,7 +14,9 @@ export class FilmListComponent implements OnInit {
   films: Film[];
   sortingMethod: number;
   favCount: number;
-    
+  show: number = 3;
+  qwery: string;
+  searchArray: Film[];
 
   transform(films: object[], sortingMethod: boolean):any {
     return this.films.sort((a:any, b:any) => {
@@ -25,19 +28,27 @@ export class FilmListComponent implements OnInit {
     })
   }
     
-  setFavFilms(like, film){
-    film.isFavorite  = film.isFavorite ? true : false;
-    this.favCount = this.films.filter(f => !f.isFavorite).length;
+  search(value) {
+    value = value.toLowerCase();
+    value.length <= 2 ? this.films = this.searchArray :
+    this.films = this.searchArray.filter((item) =>  item.name.toLowerCase().indexOf(value) !== -1);
+    this.setFavFilms();
   }
 
+  setFavFilms(){
+    this.favCount = this.searchArray.filter(f => f.isFavorite).length;
+  }
+  
   constructor(public filmsService: FilmService) {  }
     
   ngOnInit() { 
     this.getAllFilms();
+    this.setFavFilms();
   }
 
   getAllFilms() {
     this.films = this.filmsService.getFilms();
+    this.searchArray = this.films;
   }
 
 
