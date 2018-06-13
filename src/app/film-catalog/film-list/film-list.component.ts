@@ -17,7 +17,7 @@ export class FilmListComponent implements OnInit {
   show: number = 3;
   qwery: string;
   searchArray: Film[];
-
+  // filter from A to Z and from Z to A
   transform(films: object[], sortingMethod: boolean):any {
     return this.films.sort((a:any, b:any) => {
       let x = a.name.toLowerCase();
@@ -27,25 +27,31 @@ export class FilmListComponent implements OnInit {
       return 0;
     })
   }
-    
+  // filter search  
   search(value) {
-    value = value.toLowerCase();
+    value = value.toLowerCase().trim();
     value.length <= 2 ? this.films = this.searchArray :
     this.films = this.searchArray.filter((item) =>  item.name.toLowerCase().indexOf(value) !== -1);
-    this.setFavFilms();
+    console.log()
   }
-
+  // filter for favorites films
   setFavFilms(){
-    this.favCount = this.searchArray.filter(f => f.isFavorite).length;
+    this.favCount = this.searchArray.filter(el => el.isFavorite).length;
   }
   
+  animation(e){
+    console.log(e);
+    console.log(this.show);
+    console.log(this.films)
+  } 
+
   constructor(public filmsService: FilmService) {  }
     
   ngOnInit() { 
     this.getAllFilms();
     this.setFavFilms();
   }
-
+  // get data from service
   getAllFilms() {
     this.films = this.filmsService.getFilms();
     this.searchArray = this.films;

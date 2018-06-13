@@ -23,14 +23,17 @@
   </mat-toolbar>
 </mat-card>
 <mat-card>
-  <div [ngClass]="{'no-matches': films.length === 0}" *ngIf="films.length === 0"><img src="../assets/img/404_page.jpg" alt=""></div>
+  <div [ngClass]="{'no-matches': films.length === 0}" *ngIf="films.length === 0">
+    <h4>With this request <span>"{{qwery}}" </span> didn't found anything.... Sorry :( </h4>
+    <h3>Pls, try again ;)</h3>
+    <img src="../assets/img/404_page.jpg" alt="">
+</div>
 
   <mat-grid-list cols="3" class="search-results" rowHeight="600px" *ngIf="films.length !== 0">
     <mat-grid-tile *ngFor="let film of films | slice:0:show" class="my-grid-tile">
-      <app-film-item [filmItem]='film' (add)="setFavFilms($event)" ></app-film-item>
+      <app-film-item [filmItem]='film' (add)="setFavFilms($event)"></app-film-item>
     </mat-grid-tile>
   </mat-grid-list>
-
-  <button mat-button class="show-more" (click)="show = show+3" *ngIf="show < films.length">Load more  {{films.length-show}} films...</button>
+  <button mat-button class="show-more" (click)="show = show+3; animation($event)" *ngIf="show < films.length">Load more  {{films.length-show}} films...</button>
 
 </mat-card>

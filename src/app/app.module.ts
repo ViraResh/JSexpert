@@ -13,6 +13,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
 
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
     MatIconModule,
     MatButtonModule,
     MatTabsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
