@@ -9,8 +9,6 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
   pageName: string = "Film Catalog Dashboard";
 
-  list: string[] = ['asd', 'asd']; 
-
   constructor() { }
 
   ngOnInit() { }

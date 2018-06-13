@@ -33,6 +33,11 @@ form {
   margin-right: 15%;
 }
 
+.no-matches span {
+  color: #d0a117;
+}
+
 .no-matches img {
   width: 100%;
 }
+

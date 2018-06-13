@@ -15,7 +15,7 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { FilmListComponent } from './film-list/film-list.component';
 import { FilmItemComponent } from './film-list/film-item/film-item.component';
 import { SearchFilterPipe } from 'src/app/film-catalog/search-filter.pipe';
-
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 
 @NgModule({
@@ -30,14 +30,16 @@ import { SearchFilterPipe } from 'src/app/film-catalog/search-filter.pipe';
     MatSelectModule,
     MatIconModule,
     MatInputModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    SweetAlert2Module.forRoot()
   ],
   declarations: [
     MainComponent, 
     FilmListComponent, 
     FilmItemComponent,
     DetailsComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    
   ]
 })
 export class FilmCatalogModule { }
