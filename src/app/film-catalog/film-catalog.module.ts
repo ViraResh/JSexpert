@@ -1,36 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainComponent } from './main/main.component';
 import { FormsModule } from '@angular/forms';
+
+import { MainComponent } from './main/main.component';
 import { DetailsComponent } from './details/details.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { ActorItemComponent } from './film-list/actor-item/actor-item.component';
 import { FilmListComponent } from './film-list/film-list.component';
 import { FilmItemComponent } from './film-list/film-item/film-item.component';
-import { SearchFilterPipe } from 'src/app/film-catalog/search-filter.pipe';
+
+import { HttpClientModule } from '@angular/common/http';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatToolbarModule,
-    MatTabsModule,
-    MatSelectModule,
-    MatIconModule,
-    MatInputModule,
-    InfiniteScrollModule,
+    HttpClientModule,
+    SharedModule,
     SweetAlert2Module.forRoot()
   ],
   declarations: [
@@ -38,8 +26,7 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
     FilmListComponent, 
     FilmItemComponent,
     DetailsComponent,
-    SearchFilterPipe,
-    
+    ActorItemComponent
   ]
 })
 export class FilmCatalogModule { }
