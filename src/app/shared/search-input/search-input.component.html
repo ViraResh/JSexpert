@@ -1,0 +1,6 @@
+<div class="search">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Search {{changeIndex == 0 ? 'film' : 'actor' }}..." [ngModel]="value" (ngModelChange)="setSearchValue($event)">
+      <mat-icon>search</mat-icon>
+    </mat-form-field>
+</div>

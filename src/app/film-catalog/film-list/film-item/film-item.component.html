@@ -1,20 +1,33 @@
 <mat-card class="card">
   <mat-card-header>
-    <mat-card-title>
-      {{filmItem.name}}
-    </mat-card-title>
-    <mat-card-subtitle>{{filmItem.year}}</mat-card-subtitle>
+    <div class="progress-wrapper">
+      <mat-progress-spinner color="{{filmItem.vote_average*10 >=60 ? 'accent' : 'primary'}}" mode="determinate" value={{filmItem.vote_average*10}} [diameter]="50"></mat-progress-spinner>
+      <p id="progress">{{filmItem.vote_average*10}}
+        <span>%</span>
+      </p>
+    </div>
+    <div class="film-header">
+      <mat-card-title>
+        {{filmItem.original_title}}
+      </mat-card-title>
+      <mat-card-subtitle>{{filmItem.release_date}}</mat-card-subtitle>
+    </div>
   </mat-card-header>
- <img mat-card-image src="{{filmItem.imgUrl}}" alt="{{filmItem.name}}">
-  <mat-card-content> 
+
+  <img mat-card-image *ngIf="filmImg !== null; else noImg" src="{{startPath + size + filmImg}}" alt="{{filmItem.original_title}}">
+  <ng-template #noImg >
+      <img mat-card-image class="noImg" src="../assets/img/anon.png" alt="notFound">
+  </ng-template>
+
+  <mat-card-content>
     <details-inner>
-        {{filmItem.description}}
-    </details-inner> 
-   </mat-card-content>
+      {{filmItem.overview | slice:0:120 }}...
+    </details-inner>
+  </mat-card-content>
   <mat-card-actions>
     <button mat-button>Открыть</button>
-    <mat-icon [swal]="['Cool!', 'Film ' + filmItem.name + isFavorite + ' favorite', 'success' ]" (confirm)="addToFavorite()">
+    <!-- <mat-icon [swal]="['Cool!', 'Film ' + filmItem.name + isFavorite + ' favorite', 'success' ]" (confirm)="addToFavorite()">
       {{filmItem.isFavorite ? 'favorite' : 'favorite_border'}}
-    </mat-icon>
+    </mat-icon> -->
   </mat-card-actions>
 </mat-card>
