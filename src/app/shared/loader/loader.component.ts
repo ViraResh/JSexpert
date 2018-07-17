@@ -14,10 +14,9 @@ export class LoaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log(this.loaderService, "LoaderComponent")
     this.loaderService.status.subscribe((val: boolean) => {
       this.showLoader = val;
-  });
+    });
   }
 
 }
