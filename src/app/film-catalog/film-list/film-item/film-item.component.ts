@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, Injectable, Output, EventEmitter } from '@angular/core';
 
 import { FilmService } from 'src/app/film-catalog/film.service';
+import { FavoriteService } from 'src/app/services/favorite.service';
 import { Film } from 'src/app/interfaces/film';
+
 
 @Component({
   selector: 'app-film-item',
@@ -12,26 +14,32 @@ import { Film } from 'src/app/interfaces/film';
 export class FilmItemComponent implements OnInit {
   @Input() filmItem: Film;
   @Input() filmImg:any;
-  @Output() add = new EventEmitter();
+  // @Output() add = new EventEmitter();
 
   startPath: any;
   size: string = '/w500';
 
-  constructor(private filmService: FilmService) { }
+  constructor(private filmService: FilmService, private favService: FavoriteService) { }
   
   ngOnInit() {
     this.startPath = this.filmService.imgPath;
   }
 
 
-  //add to favoriteson click and send to parent component to "add" output
-  // addToFavorite(){
-  //   this.filmItem.isFavorite = !this.filmItem.isFavorite;
-  //   this.add.emit(this.filmItem.isFavorite);
-  // }
+  // add to favorites on click
+  addToFavorite(){
+    this.filmItem.favorite = !this.filmItem.favorite;
+    // console.log(this.filmItem.id, "this.filmItem.favorite")
+    this.filmItem.favorite ?
+      this.favService.addFavor(this.filmItem.id)
+        .subscribe(() => this.filmItem.favorite = true):
+      this.favService.dellFavor(this.filmItem.id)
+        .subscribe(() => this.filmItem.favorite = false);
+    // this.add.emit(this.filmItem.favorite);
+  }
 
-  // public get isFavorite(): string {
-  //   return this.filmItem.isFavorite ? ' deleted from ' : ' added to '
-  // }
+  public get isFavorite(): string {
+    return this.filmItem.favorite ? ' deleted from ' : ' added to '
+  }
 
 }
