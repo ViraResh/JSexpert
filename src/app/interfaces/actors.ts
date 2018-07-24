@@ -1,4 +1,4 @@
-export interface Actors {
+export class Actors {
     adult: boolean;
     id: number;
     known_for: any;

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, Subject } from 'rxjs';
@@ -8,40 +8,27 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { LoaderService } from 'src/app/services/loader.service';
 import { FavoriteService } from 'src/app/services/favorite.service';
 
+import { API_CONFIG, apiConfig } from '../api.config'
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class FilmService {
-  apiUrl: string = "https://api.themoviedb.org/3"
-  apiKey: string = '0994e7679a856150aadcecf7de489bce'
-  params: string = `&api_key=${this.apiKey}&language=en-EN`
-  movieUrl: string = `${this.apiUrl}/movie`
-  personUrl: string = `${this.apiUrl}/person`
-
-  searchUrlMovie: string = `${this.apiUrl}/search/movie`
-  searchUrlPerson: string = `${this.apiUrl}/search/person`
-
-  imgPath: string = 'https://image.tmdb.org/t/p'
-  midImgPath: string = `${this.imgPath}/w500`
-  smallImgPath: string = `${this.imgPath}/w185`
-  bigBackPath: string = `${this.imgPath}/w1280`
-  midBackPath: string = `${this.imgPath}/w780`
-  smallBackPath: string = `${this.imgPath}/w300`
   
-
   allFilms$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   allActors$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
-  constructor(private http: HttpClient,
+  constructor(@Inject(API_CONFIG)
+              public apiConfig: any,
+              private http: HttpClient,
               private loaderService: LoaderService,
               private favService: FavoriteService ) {
   }
 
   getAllFilms(page?: number): Observable<any> {
     this.loaderService.display(true);
-    this.http.get(`${this.movieUrl}/popular?page=${page}${this.params}`)
+    this.http.get(`${this.apiConfig.movieUrl}/popular?page=${page}${this.apiConfig.params}`)
       .subscribe((res: any) => {
         let ids = [];
         res.results.forEach(el => {
@@ -56,7 +43,7 @@ export class FilmService {
             });
           })
         });
-       this.allFilms$.next(res)
+      this.allFilms$.next(res);
       })
     this.loaderService.display(false);
     return this.allFilms$.asObservable();
@@ -64,7 +51,7 @@ export class FilmService {
 
   getAllActors(page?: number): Observable<any> {
     this.loaderService.display(true);
-    this.http.get(`${this.personUrl}/popular?page=${page}${this.params}`)
+    this.http.get(`${this.apiConfig.personUrl}/popular?page=${page}${this.apiConfig.params}`)
       .subscribe((res: any) => {
         this.allActors$.next(res)
       })
@@ -74,7 +61,7 @@ export class FilmService {
   
   searchFilm(qwery: any, page?: number) {
     this.loaderService.display(true);
-    this.http.get(`${this.searchUrlMovie}?query=${qwery}&page=${page}${this.params}`)
+    this.http.get(`${this.apiConfig.searchUrlMovie}?query=${qwery}&page=${page}${this.apiConfig.params}`)
       .subscribe((res: any) => {
         this.allFilms$.next(res);
       })
@@ -83,7 +70,7 @@ export class FilmService {
 
   searchActors(qwery: any, page?: number) {
     this.loaderService.display(true);
-    this.http.get(`${this.searchUrlPerson}?query=${qwery}&page=${page}${this.params}`)
+    this.http.get(`${this.apiConfig.searchUrlPerson}?query=${qwery}&page=${page}${this.apiConfig.params}`)
       .subscribe((res: any) => {
         this.allActors$.next(res);
       })
