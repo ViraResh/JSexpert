@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FilmCatalogModule } from './film-catalog/film-catalog.module';
+// import { FilmCatalogModule } from './film-catalog/film-catalog.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -18,17 +18,19 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
+import { MainCatalogModule } from 'src/app/main/main-catalog.module';
 import { API_CONFIG, apiConfig } from './api.config';
+// import { FilmsComponent } from './films/films.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule, 
-    FilmCatalogModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
@@ -37,7 +39,8 @@ import { API_CONFIG, apiConfig } from './api.config';
     MatProgressSpinnerModule,
     MatPaginatorModule,
     InfiniteScrollModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    MainCatalogModule
   ],
   providers: [
     {provide: API_CONFIG, useValue: apiConfig}

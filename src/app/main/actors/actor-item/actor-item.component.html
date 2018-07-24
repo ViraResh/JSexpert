@@ -1,0 +1,28 @@
+<mat-card class="card">
+  <mat-card-header>
+    <div class="progress-wrapper">
+      <mat-progress-spinner color="{{actorPopularity >=60 ? 'accent' : 'primary'}}" mode="determinate" value={{actorItem.popularity}}
+        [diameter]="50"></mat-progress-spinner>
+      <p id="progress">{{actorPopularity}}
+        <span>%</span>
+      </p>
+    </div>
+    <div class="film-header">
+      <mat-card-title>
+        {{actorItem.name}}
+      </mat-card-title>
+    </div>
+  </mat-card-header>
+
+  <img mat-card-image *ngIf="actorImg !== null; else noImg" src="{{startPath + size + actorImg}}" alt="{{actorItem.name}}">
+  <ng-template #noImg>
+    <img mat-card-image class="noImg" src="../assets/img/anon.png" alt="notFound">
+  </ng-template>
+
+  <mat-card-actions>
+    <button mat-button>Открыть</button>
+    <!-- <mat-icon [swal]="['Cool!', 'Film ' + filmItem.name + isFavorite + ' favorite', 'success' ]" (confirm)="addToFavorite()">
+        {{filmItem.isFavorite ? 'favorite' : 'favorite_border'}}
+      </mat-icon> -->
+  </mat-card-actions>
+</mat-card>

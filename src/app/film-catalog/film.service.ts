@@ -15,7 +15,24 @@ import { API_CONFIG, apiConfig } from '../api.config'
 })
 
 export class FilmService {
-  
+  // apiUrl: string = "https://api.themoviedb.org/3"
+  // apiKey: string = '0994e7679a856150aadcecf7de489bce'
+  // params: string = `&api_key=${this.apiKey}&language=en-EN`
+  // movieUrl: string = `${this.apiUrl}/movie`
+  // personUrl: string = `${this.apiUrl}/person`
+
+  // searchUrlMovie: string = `${this.apiUrl}/search/movie`
+  // searchUrlPerson: string = `${this.apiUrl}/search/person`
+
+  // imgPath: string = 'https://image.tmdb.org/t/p'
+  // midImgPath: string = `${this.imgPath}/w500`
+  // smallImgPath: string = `${this.imgPath}/w185`
+  // bigBackPath: string = `${this.imgPath}/w1280`
+  // midBackPath: string = `${this.imgPath}/w780`
+  // smallBackPath: string = `${this.imgPath}/w300`
+
+
+
   allFilms$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   allActors$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
@@ -28,6 +45,7 @@ export class FilmService {
 
   getAllFilms(page?: number): Observable<any> {
     this.loaderService.display(true);
+    // this.http.get(`${this.movieUrl}/popular?page=${page}${this.params}`)
     this.http.get(`${this.apiConfig.movieUrl}/popular?page=${page}${this.apiConfig.params}`)
       .subscribe((res: any) => {
         let ids = [];
@@ -51,6 +69,7 @@ export class FilmService {
 
   getAllActors(page?: number): Observable<any> {
     this.loaderService.display(true);
+    // this.http.get(`${this.personUrl}/popular?page=${page}${this.params}`)
     this.http.get(`${this.apiConfig.personUrl}/popular?page=${page}${this.apiConfig.params}`)
       .subscribe((res: any) => {
         this.allActors$.next(res)

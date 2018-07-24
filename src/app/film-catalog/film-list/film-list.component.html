@@ -2,7 +2,7 @@
   <app-loader></app-loader>
   <mat-toolbar class="menu-toolbar">
     <mat-toolbar-row>
-      <app-search-input [changeIndex]='changeIndex' (searchItem)="getSearchValue($event)"  [value]='qwery'></app-search-input>
+      <app-search-input [changeIndex]='changeIndex' (searchItem)="getSearchValue($event)" [value]='qwery'></app-search-input>
       <!-- <p><span><mat-icon>{{favCount ? 'star_rate' : 'stars'}}</mat-icon> </span> {{favCount}} {{changeIndex == 0 ? 'film' : 'actor' }}</p> -->
       <span class="menu-spacing"></span>
 
@@ -19,61 +19,63 @@
   </mat-toolbar>
 </mat-card>
 <mat-card>
-  
-    
+
+
   <mat-tab-group dynamicHeight="true" (selectedTabChange)="changeLayout($event)">
     <mat-tab label="Films">
       <div [ngClass]="{'no-matches': filmTotalResults === 0 }" *ngIf="filmTotalResults === 0">
-        <h4>With this request <span>"{{qwery}}" </span> didn't found anything.... Sorry :( </h4>
+        <h4>With this request
+          <span>"{{qwery}}" </span> didn't found anything.... Sorry :( </h4>
         <h3>Pls, try again ;)</h3>
         <img src="../assets/img/404_page.jpg" alt="notFound">
       </div>
       <mat-grid-list cols="4" class="search-results" rowHeight="800px">
-          <mat-grid-tile *ngFor="let film of filmsData$" class="my-grid-tile">
-            <app-film-item [filmItem]='film' [filmImg]='film.poster_path' (add)="setFavFilms($event)"></app-film-item>
-          </mat-grid-tile>
+        <mat-grid-tile *ngFor="let film of filmsData$" class="my-grid-tile">
+          <app-film-item [filmItem]='film' [filmImg]='film.poster_path' (add)="setFavFilms($event)"></app-film-item>
+        </mat-grid-tile>
       </mat-grid-list>
       <div class="pagination">
-          <div class="info-page">
-            <p>Currently on page: {{filmCurrentPage}} of {{filmTotalPage}} pages of films</p>
-            <p>({{filmTotalResults}} results)</p>
-          </div>
-          <div class="button-group">
-            <button mat-button class="show-more" (click)="previousPageFilm()" *ngIf="filmCurrentPage > 1">
-              <mat-icon>keyboard_arrow_left</mat-icon>  
-            </button>
-            <button mat-button class="show-more" (click)="nextPageFilm()" *ngIf="filmCurrentPage !== filmTotalPage">
-              <mat-icon>keyboard_arrow_right</mat-icon>
-            </button>
-          </div>
+        <div class="info-page">
+          <p>Currently on page: {{filmCurrentPage}} of {{filmTotalPage}} pages of films</p>
+          <p>({{filmTotalResults}} results)</p>
         </div>
+        <div class="button-group">
+          <button mat-button class="show-more" (click)="previousPageFilm()" *ngIf="filmCurrentPage > 1">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+          <button mat-button class="show-more" (click)="nextPageFilm()" *ngIf="filmCurrentPage !== filmTotalPage">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </button>
+        </div>
+      </div>
     </mat-tab>
-    
+
     <mat-tab label="Actors">
       <div [ngClass]="{'no-matches': actorTotalResults === 0 }" *ngIf="actorTotalResults === 0">
-        <h4>With this request <span>"{{qwery}}" </span> didn't found anything.... Sorry :( </h4>
+        <h4>With this request
+          <span>"{{qwery}}" </span> didn't found anything.... Sorry :( </h4>
         <h3>Pls, try again ;)</h3>
         <img src="../assets/img/404_page.jpg" alt="notFound">
       </div>
       <mat-grid-list cols="4" class="search-results" rowHeight="800px">
-          <mat-grid-tile *ngFor="let actor of actorsData$" class="my-grid-tile" >
-              <app-actor-item [actorItem]='actor' [actorPopularity]='actor.popularity' [actorImg]='actor.profile_path'></app-actor-item>
-          </mat-grid-tile>
+        <mat-grid-tile *ngFor="let actor of actorsData$" class="my-grid-tile">
+          <app-actor-item [actorItem]='actor' [actorPopularity]='actor.popularity' [actorImg]='actor.profile_path'></app-actor-item>
+        </mat-grid-tile>
       </mat-grid-list>
       <div class="pagination">
-          <div class="info-page">
-            <p>Currently on page: {{actorCurrentPage}} of {{actorTotalPage}} pages of actors</p>
-            <p>({{actorTotalResults}} results)</p>
-          </div>
-          <div class="button-group">
-            <button mat-button class="show-more" (click)="previousPageActor()" *ngIf="actorCurrentPage > 1">
-              <mat-icon>keyboard_arrow_left</mat-icon>
-            </button>
-            <button mat-button class="show-more" (click)="nextPageActor()" *ngIf="actorCurrentPage !== actorTotalPage">
-              <mat-icon>keyboard_arrow_right</mat-icon>
-            </button>
-          </div>
+        <div class="info-page">
+          <p>Currently on page: {{actorCurrentPage}} of {{actorTotalPage}} pages of actors</p>
+          <p>({{actorTotalResults}} results)</p>
         </div>
+        <div class="button-group">
+          <button mat-button class="show-more" (click)="previousPageActor()" *ngIf="actorCurrentPage > 1">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+          <button mat-button class="show-more" (click)="nextPageActor()" *ngIf="actorCurrentPage !== actorTotalPage">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </button>
+        </div>
+      </div>
     </mat-tab>
   </mat-tab-group>
   <!-- <button mat-button class="show-more" (click)="show = show+show" *ngIf="show < filmsData.length">Load more  {{filmsData.length-show}} films...</button> -->

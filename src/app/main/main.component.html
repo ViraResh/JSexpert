@@ -1,0 +1,40 @@
+<mat-card class="menu-card">
+  <app-loader></app-loader>
+  <mat-toolbar class="menu-toolbar">
+    <mat-toolbar-row>
+      <app-search-input [changeIndex]='changeIndex' (searchItem)="getSearchValue($event)" [value]='qwery'></app-search-input>
+      <!-- <p><span><mat-icon>{{favCount ? 'star_rate' : 'stars'}}</mat-icon> </span> {{favCount}} {{changeIndex == 0 ? 'film' : 'actor' }}</p> -->
+      <span class="menu-spacing"></span>
+
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Sort by" [(value)]="sortingMethod" (selectionChange)="transform()">
+            <mat-option value="1">By name: A-Z</mat-option>
+            <mat-option value="-1">By name: Z-A </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+</mat-card>
+
+<app-films *ngIf="router.url == '/films'"></app-films>
+<app-actors *ngIf="router.url == '/actors'"></app-actors>
+
+<mat-card class="menu-card">
+  <div class="pagination">
+    <div class="info-page">
+      <p>Currently on page: {{filmCurrentPage}} of {{filmTotalPage}} pages of films</p>
+      <p>({{filmTotalResults}} results)</p>
+    </div>
+    <div class="button-group">
+      <button mat-button class="show-more" (click)="previousPageFilm()" *ngIf="filmCurrentPage > 1">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <button mat-button class="show-more" (click)="nextPageFilm()" *ngIf="filmCurrentPage !== filmTotalPage">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>
