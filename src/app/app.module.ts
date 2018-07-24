@@ -18,6 +18,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
+import { API_CONFIG, apiConfig } from './api.config';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -36,6 +38,9 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
     MatPaginatorModule,
     InfiniteScrollModule,
     SweetAlert2Module.forRoot()
+  ],
+  providers: [
+    {provide: API_CONFIG, useValue: apiConfig}
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,10 @@
-import { Component, OnInit, Input, Injectable, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Injectable, Output, EventEmitter, Inject } from '@angular/core';
 
 import { FilmService } from 'src/app/film-catalog/film.service';
 import { FavoriteService } from 'src/app/services/favorite.service';
+
+import { apiConfig, API_CONFIG } from '../../../api.config'
+
 import { Film } from 'src/app/interfaces/film';
 
 
@@ -19,13 +22,15 @@ export class FilmItemComponent implements OnInit {
   startPath: any;
   size: string = '/w500';
 
-  constructor(private filmService: FilmService, private favService: FavoriteService) { }
+  constructor(@Inject(API_CONFIG)
+              public apiConfig,
+              private filmService: FilmService, 
+              private favService: FavoriteService) { }
   
   ngOnInit() {
-    this.startPath = this.filmService.imgPath;
+    this.startPath = this.apiConfig.imgPath;
   }
-
-
+  
   // add to favorites on click
   addToFavorite(){
     this.filmItem.favorite = !this.filmItem.favorite;

@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 
 //services
 import { FilmService } from 'src/app/film-catalog/film.service';
+import { apiConfig, API_CONFIG } from '../../../api.config'
 
 //interfaces
 import { Actors } from 'src/app/interfaces/actors';
@@ -19,11 +20,13 @@ export class ActorItemComponent implements OnInit {
   startPath: any;
   size: string = '/w500';
  
-  constructor( private filmServise: FilmService ) { }
+  constructor( @Inject(API_CONFIG)
+              public apiConfig,
+              private filmServise: FilmService ) { }
 
   ngOnInit() {
     this.actorPopularity = Math.round(this.actorPopularity );
-    this.startPath = this.filmServise.imgPath;
+    this.startPath = this.apiConfig.imgPath;
   }
 
   
