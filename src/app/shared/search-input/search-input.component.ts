@@ -9,14 +9,14 @@ export class SearchInputComponent implements OnInit {
   @Input() changeIndex: number;
   @Input() value: string;
   @Output() searchItem = new EventEmitter();
-  
+
 
   constructor() {
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  setSearchValue(searchValue){
+  setSearchValue(searchValue) {
     this.searchItem.emit(searchValue);
   }
 

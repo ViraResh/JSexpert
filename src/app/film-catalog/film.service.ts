@@ -15,15 +15,15 @@ import { API_CONFIG, apiConfig } from '../api.config'
 })
 
 export class FilmService {
-  
+
   allFilms$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   allActors$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
-  constructor(@Inject(API_CONFIG)
-              public apiConfig: any,
-              private http: HttpClient,
-              private loaderService: LoaderService,
-              private favService: FavoriteService ) {
+  constructor( @Inject(API_CONFIG)
+  public apiConfig: any,
+    private http: HttpClient,
+    private loaderService: LoaderService,
+    private favService: FavoriteService) {
   }
 
   getAllFilms(page?: number): Observable<any> {
@@ -32,18 +32,18 @@ export class FilmService {
       .subscribe((res: any) => {
         let ids = [];
         res.results.forEach(el => {
-            ids.push(el.id);
+          ids.push(el.id);
         })
         this.favService.getFavor(ids).subscribe((response) => {
-         response.forEach(el => {
-           res.results.map(elem => {
-            if(el._id == elem.id) {
+          response.forEach(el => {
+            res.results.map(elem => {
+              if (el._id == elem.id) {
                 elem.favorite = true;
               }
             });
           })
         });
-      this.allFilms$.next(res);
+        this.allFilms$.next(res);
       })
     this.loaderService.display(false);
     return this.allFilms$.asObservable();
@@ -58,7 +58,7 @@ export class FilmService {
     this.loaderService.display(false);
     return this.allActors$.asObservable();
   }
-  
+
   searchFilm(qwery: any, page?: number) {
     this.loaderService.display(true);
     this.http.get(`${this.apiConfig.searchUrlMovie}?query=${qwery}&page=${page}${this.apiConfig.params}`)
